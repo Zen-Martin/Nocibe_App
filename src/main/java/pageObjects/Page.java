@@ -12,6 +12,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.android.AndroidTouchAction;
 import io.appium.java_client.ios.IOSTouchAction;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.logging.log4j.LogManager;
@@ -49,6 +50,9 @@ public class Page {
 
     protected SystemPropertiesReader systemPropertiesReader;
     protected ConfigPropertiesReader configPropertiesReader;
+
+    @AndroidFindBy(id = "com.pictime.nocibe:id/home_navigation")
+    private MobileElement homeView;
 
     public Page() {
         driver = Properties.APPIUM_DRIVER_MANAGER.getDriver();
@@ -155,7 +159,7 @@ public class Page {
     }
 
     public void launch() {
-        driver.executeScript("mobile: performEditorAction", ImmutableMap.of("action", "done"));
+        driver.executeScript("mobile: performEditorAction", ImmutableMap.of("action", "search"));
     }
 
     /**

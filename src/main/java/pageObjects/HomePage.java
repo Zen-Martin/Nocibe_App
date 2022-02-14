@@ -13,9 +13,6 @@ public class HomePage extends Page {
 
     private static final Logger LOG = LogManager.getLogger(HomePage.class);
 
-    @AndroidFindBy(id = "com.pictime.nocibe:id/home_navigation")
-    private MobileElement homeView;
-
     @AndroidFindBy(id = "com.pictime.nocibe:id/catalog_navigation")
     private MobileElement categoryView;
 
@@ -27,9 +24,6 @@ public class HomePage extends Page {
 
     @AndroidFindBy(id = "com.pictime.nocibe:id/searchEditText")
     private MobileElement searchBar;
-
-    @AndroidFindBy(id = "com.pictime.nocibe:id/titleTextView")
-    private MobileElement resultOccurences;
 
     @AndroidFindBy(id = "com.pictime.nocibe:id/skip")
     private MobileElement overviewPopUp;
@@ -79,8 +73,8 @@ public class HomePage extends Page {
     }
 
     public boolean verifyFoundResult(){
-        shortWaitUntil(visibilityOf(resultOccurences));
-        return resultOccurences.isDisplayed();
+        shortWaitUntil(visibilityOf(productOccurences));
+        return productOccurences.isDisplayed();
     }
 
     public boolean verifyNotFoundResult(){

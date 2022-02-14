@@ -27,9 +27,7 @@ public class HomeSteps {
     }
 
     @When("User enter a {string} in search bar")
-    public void userEnterProductFind(String element) {
-        homePage.makeSearch(element);
-    }
+    public void userEnterProductFind(String element) { homePage.makeSearch(element);}
 
     @And("User validate his choice")
     public void userValidateHisChoice() {
@@ -47,14 +45,10 @@ public class HomeSteps {
     }
 
     @Then("User should see message about no result found")
-    public void noResultFound() {
-        Assert.assertEquals(homePage.verifyNotFoundResult(),true);
-    }
+    public void noResultFound() { Assert.assertEquals(homePage.verifyNotFoundResult(),true);}
 
     @Given("User is on category menu")
-    public void categoryMenuPage() {
-        homePage.getOnCategory();
-    }
+    public void categoryMenuPage() { homePage.getOnCategory();}
 
     @Given("User is on selected {string}")
     public void selectCategory(String category) {
@@ -70,5 +64,10 @@ public class HomeSteps {
     public void titleOfDisplay(String title) {
         Assert.assertEquals(homePage.verifyViewTitle(title),true);
     }
+
+    @When("User enter a {string}")
+    public void parfumProductPage(String element) { homePage.makeSearch(element);}
+
+
 
 }

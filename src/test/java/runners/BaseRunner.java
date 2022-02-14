@@ -17,6 +17,7 @@ public class BaseRunner extends AbstractTestNGCucumberTests {
         AppiumDriverManager.setDriver(java.util.Optional
                 .ofNullable(platform)
                 .orElse(Properties.SYSTEM_PROPERTIES_READER.platformName));
+
     }
 
     @AfterClass
