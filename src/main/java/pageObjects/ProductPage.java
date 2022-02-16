@@ -32,6 +32,7 @@ public class ProductPage extends Page{
     }
 
     public void selectProduct(){
+        seeProduct();
         productImage.get(0).click();
     }
 

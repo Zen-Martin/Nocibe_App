@@ -14,7 +14,8 @@
 #		Examples:
 #		  |product     |
 #		  |Parfum      |
-#
+
+
 #	@TEST_OF-648
 #	Scenario Outline: Suggestions when entering a product
 #		Given User is on search bar
@@ -24,7 +25,8 @@
 #		Examples:
 #		  |text     |
 #		  |homme    |
-#
+
+
 #	@TEST_OF-659
 #	Scenario Outline: Not find product
 #		Given User is on search bar
@@ -35,7 +37,8 @@
 #		Examples:
 #		  |product     |
 #		  |Bbobda      |
-#
+
+
 #	@TEST_OF-652
 #	Scenario Outline: Find a product with homepage category
 #		Given User is on selected "<category>"
@@ -45,7 +48,8 @@
 #		Examples:
 #			|category   |subcategory  |result_Page  |
 #			|Parfum     |Parfum Homme |PARFUM HOMME |
-#
+
+
 #	@TEST_OF-653
 #	Scenario Outline: Subcategory occurence from product category
 #		Given User is on category menu

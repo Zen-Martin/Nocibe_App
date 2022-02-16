@@ -26,4 +26,6 @@ public class CategorySteps {
     public void verifyTheseCategory() {
         Assert.assertEquals(categoryPage.verifyElementFound(),true);
     }
+
+
 }
