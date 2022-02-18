@@ -111,13 +111,6 @@ public class Page {
         element.click();
     }
 
-    public void scroll(String text){
-        AndroidElement element =  (AndroidElement) driver.findElement(MobileBy.AndroidUIAutomator(              "new UiScrollable(new UiSelector()" +
-                ".scrollable(true).index(0))" +
-                ".scrollIntoView(new UiSelector()" +
-                ".text(\""+text+"\"))"));
-    }
-
     public void findElement(List<MobileElement> list, String element, int occurence){
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getText().equals(element)) {

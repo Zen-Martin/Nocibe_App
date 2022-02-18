@@ -42,6 +42,14 @@ Feature: Products Page
 #    When User click on cross icon near any contain
 #    Then User should see contain disappear
 
+  @TEST_OF-693
+  Scenario: Ready to payment
+    Given User select a product
+    And User go to cart page
+    When User click button "validate my cart"
+    And User get logged
+    Then User should see payment page
+
 #  @TEST_OF-685
 #  Scenario: Available product
 #    Given User select a product

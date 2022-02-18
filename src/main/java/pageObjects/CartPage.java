@@ -36,6 +36,15 @@ public class CartPage extends Page{
     @AndroidFindBy(id= "com.pictime.nocibe:id/addedText")
     private MobileElement alert;
 
+    @AndroidFindBy(xpath = ".//android.widget.Button[@text='VALIDER VOTRE PANIER']")
+    private MobileElement acceptCart;
+
+    @AndroidFindBy(xpath = ".//android.widget.Button[@text='VALIDER LA LIVRAISON']")
+    private MobileElement deliveryButton;
+
+    @AndroidFindBy(xpath = ".//android.widget.TextView[@text='Ajouter au panier']")
+    private MobileElement addCartButton;
+
     private String initContain = "";
 
     public void goToCartPage(){
@@ -46,7 +55,7 @@ public class CartPage extends Page{
 
     public void addToCart(){
         shortWaitUntil(visibilityOf(productInfoFrame));
-        actOnElementList(textView,"Ajouter");
+        click(addCartButton);
     }
 
     public void cartItemOperation(String action){
@@ -63,8 +72,18 @@ public class CartPage extends Page{
         return cartIcon.getAttribute("content-desc").equals(initContain);
     }
 
+    public void validateCart(){
+        click(acceptCart);
+    }
+
     public boolean verifyAddToCart(){
         return alert.isDisplayed();
+    }
+
+    public boolean verifyDeliveryPage(){
+        validateCart();
+        shortWaitUntil(visibilityOf(deliveryButton));
+        return deliveryButton.isDisplayed();
     }
 
 }

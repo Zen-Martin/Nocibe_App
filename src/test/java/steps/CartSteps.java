@@ -51,7 +51,18 @@ public class CartSteps {
     }
 
     @Then("User should see message about product add on cart")
-    public void userShouldSeeMessageAboutProductAddOnCart() {
+    public void productAddOnCart() {
         Assert.assertEquals(cartPage.verifyAddToCart(),true);
     }
+
+    @When("User click button {string}")
+    public void userClickButton(String arg0) {
+        cartPage.validateCart();
+    }
+
+    @Then("User should see payment page")
+    public void paymentPage() {
+        Assert.assertEquals(cartPage.verifyDeliveryPage(),true);
+    }
+
 }
