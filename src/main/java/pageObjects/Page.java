@@ -13,6 +13,8 @@ import io.appium.java_client.android.AndroidTouchAction;
 import io.appium.java_client.ios.IOSTouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
@@ -20,6 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.function.Function;
 
@@ -128,6 +131,13 @@ public class Page {
             }
         }
         return occurence;
+    }
+
+    @Attachment(value = "screenshot", type = "image/png")
+    public static void saveScreenShotPNG(){
+        Allure.addAttachment("screenshot", new ByteArrayInputStream(((TakesScreenshot) Properties
+                .APPIUM_DRIVER_MANAGER.getDriver())
+                .getScreenshotAs(OutputType.BYTES)));
     }
 
 }

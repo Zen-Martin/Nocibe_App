@@ -9,6 +9,7 @@ import io.cucumber.java.Before;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pageObjects.HomePage;
+import pageObjects.Page;
 
 public class Hooks {
 
@@ -21,6 +22,7 @@ public class Hooks {
 
     @After
     public void closeApp() {
+        Page.saveScreenShotPNG();
         driver.closeApp();
     }
 
