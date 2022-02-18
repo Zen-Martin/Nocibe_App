@@ -118,7 +118,8 @@ public class Page {
                 ".text(\""+text+"\"))"));
     }
 
-    public void findElement(List<MobileElement> list, String element, int occurence){
+    public int findElement(List<MobileElement> list, String element){
+        int occurence = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getText().equals(element)) {
                 list.get(i).click();
@@ -126,6 +127,7 @@ public class Page {
                 break;
             }
         }
+        return occurence;
     }
 
 }

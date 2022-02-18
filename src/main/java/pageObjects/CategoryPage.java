@@ -18,6 +18,6 @@ public class CategoryPage extends Page{
     }
 
     public void getElement(String element){
-        findElement(textView,element,found);
+        found = found + findElement(textView,element);
     }
 }

@@ -39,8 +39,6 @@ public class HomePage extends Page {
     @AndroidFindBy(className = "android.widget.TextView")
     private List<MobileElement> textView;
 
-    private static int entryAppOccurence = 0;
-
     private int found = 0;
 
     public void reject(MobileElement element){
@@ -55,11 +53,8 @@ public class HomePage extends Page {
     }
 
     public void waitForAppLoading() {
-        if (entryAppOccurence==0){
             reject(cookieOption);
             reject(overviewPopUp);
-        }
-        entryAppOccurence++;
     }
 
     public void clickOnSearchBar(){
@@ -87,7 +82,7 @@ public class HomePage extends Page {
 
     public boolean verifyViewTitle(String element){
         shortWaitUntil(visibilityOf(productOccurences));
-        findElement(textView,element,found);
+        found = found + findElement(textView,element);
         return found!=0;
     }
 
