@@ -2,16 +2,12 @@ package pageObjects;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class CartPage extends Page{
-
-    private static final Logger LOG = LogManager.getLogger(CartPage.class);
 
     @AndroidFindBy(className = "android.widget.Button")
     private List<MobileElement> cartModificator;
@@ -37,13 +33,20 @@ public class CartPage extends Page{
     @AndroidFindBy(className = "android.widget.TextView")
     private List<MobileElement> textView;
 
+    @AndroidFindBy(id= "com.pictime.nocibe:id/addedText")
+    private MobileElement alert;
+
     private String initContain = "";
 
     public void goToCartPage(){
-        shortWaitUntil(visibilityOf(productInfoFrame));
-        actOnElementList(textView,"Ajouter");
+        addToCart();
         click(cartButton);
         initContain = cartIcon.getAttribute("content-desc");
+    }
+
+    public void addToCart(){
+        shortWaitUntil(visibilityOf(productInfoFrame));
+        actOnElementList(textView,"Ajouter");
     }
 
     public void cartItemOperation(String action){
@@ -55,18 +58,13 @@ public class CartPage extends Page{
         actOnElementList(cartModificator,action);
     }
 
-    public void actOnElementList(List<MobileElement> list, String element){
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).getText().contains(element)){
-                click(list.get(i));
-                break;
-            }
-        }
-    }
-
     public boolean verifyContainUnchanged(){
         click(cartIcon);
         return cartIcon.getAttribute("content-desc").equals(initContain);
+    }
+
+    public boolean verifyAddToCart(){
+        return alert.isDisplayed();
     }
 
 }

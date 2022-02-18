@@ -2,16 +2,12 @@ package pageObjects;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 public class HomePage extends Page {
-
-    private static final Logger LOG = LogManager.getLogger(HomePage.class);
 
     @AndroidFindBy(id = "com.pictime.nocibe:id/catalog_navigation")
     private MobileElement categoryView;
@@ -44,6 +40,8 @@ public class HomePage extends Page {
     private List<MobileElement> textView;
 
     private static int entryAppOccurence = 0;
+
+    private int found = 0;
 
     public void reject(MobileElement element){
         try {
@@ -89,7 +87,8 @@ public class HomePage extends Page {
 
     public boolean verifyViewTitle(String element){
         shortWaitUntil(visibilityOf(productOccurences));
-        return getTitle(element)!=0;
+        findElement(textView,element,found);
+        return found!=0;
     }
 
     public void selectCategory(String category){
@@ -99,18 +98,5 @@ public class HomePage extends Page {
     public void selectSubcategory(String subcategory){
         scrollClick(subcategory);
     }
-
-    public int getTitle(String element){
-        int found = 0;
-        for (int i = 0; i < textView.size(); i++) {
-            if (textView.get(i).getText().equals(element)) {
-                textView.get(i).click();
-                found++;
-                break;
-            }
-        }
-        return found;
-    }
-
 
 }

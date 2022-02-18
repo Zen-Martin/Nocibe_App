@@ -44,4 +44,14 @@ public class CartSteps {
     public void containDisappear() {
         Assert.assertEquals(cartPage.verifyContainUnchanged(),false);
     }
+
+    @When("User click on button {string}")
+    public void userClickOnButton(String arg0) {
+        cartPage.addToCart();
+    }
+
+    @Then("User should see message about product add on cart")
+    public void userShouldSeeMessageAboutProductAddOnCart() {
+        Assert.assertEquals(cartPage.verifyAddToCart(),true);
+    }
 }

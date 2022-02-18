@@ -50,28 +50,10 @@ public class ProductPage extends Page{
         return (filter==0);
     }
 
-    private void sortOption(String option){
-        for(int i=0; i<textView.size(); i++){
-            if(textView.get(i).getText().equals(option)){
-                click(textView.get(i));
-                break;
-            }
-        }
-    }
-
-    private void validChoice(String element){
-        for(int i=0; i<textView.size(); i++){
-            if(textView.get(i).getText().contains(element)){
-                click(textView.get(i));
-                break;
-            }
-        }
-    }
-
     public void sortValue(String option){
         click(filterButton);
-        sortOption(option);
-        validChoice("Afficher");
+        actOnElementList(textView,option);
+        actOnElementList(textView,"Afficher");
     }
 
     public boolean verifyCardProduct(){
