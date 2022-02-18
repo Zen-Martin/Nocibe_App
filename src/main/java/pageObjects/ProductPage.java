@@ -24,11 +24,35 @@ public class ProductPage extends Page{
     @AndroidFindBy(id = "com.pictime.nocibe:id/filterButton")
     private MobileElement filterButton;
 
+    @AndroidFindBy(id="com.pictime.nocibe:id/filter_product_button")
+    private MobileElement submitFilter;
+
+    @AndroidFindBy(xpath = ".//android.widget.TextView[@text='Confirmer']")
+    private MobileElement validOption;
+
     @AndroidFindBy(className = "android.widget.TextView")
     private List<MobileElement> textView;
 
+    @AndroidFindBy(id = "com.pictime.nocibe:id/titleTextView_filter")
+    private List<MobileElement> optionValue;
+
+    @AndroidFindBy(id = "com.pictime.nocibe:id/item_filter_label_textView")
+    private List<MobileElement> filterChoice;
+
+    @AndroidFindBy(id = "com.pictime.nocibe:id/item_filter_productCount_textView")
+    private MobileElement filterActived;
+
+    @AndroidFindBy(id = "com.pictime.nocibe:id/reset_filter_button")
+    private MobileElement resetFilter;
+
+    @AndroidFindBy(xpath = ".//android.widget.Button[@text='CONTINUER']")
+    private MobileElement resetConfirmation;
+
+    private String product_result = "";
+
     public void seeProduct(){
         shortWaitUntil(visibilityOf(productCounter));
+        product_result = productCounter.getText();
     }
 
     public void selectProduct(){
@@ -36,24 +60,24 @@ public class ProductPage extends Page{
         productImage.get(0).click();
     }
 
-    public boolean priceFilterIncrease(){
-        shortWaitUntil(visibilityOf(productPrice.get(0)));
-        int filter = 0;
-        for(int i=0; i<((productPrice.size()/100)+3); i++){
-            Double previous = removeEuroDevise(productPrice.get(i).getText());
-            Double next = removeEuroDevise(productPrice.get(i+1).getText());
-            if(previous>next){
-                filter++;
-                break;
-            }
-        }
-        return (filter==0);
+    public void filterOption(String element){
+        actOnElementList(filterChoice,element);
+        optionValue.get(0).click();
+        click(validOption);
+    }
+
+    public void submitFilter(){
+        click(submitFilter);
+    }
+
+    public void resetFilter(){
+        click(resetFilter);
+        click(resetConfirmation);
     }
 
     public void sortValue(String option){
         click(filterButton);
         actOnElementList(textView,option);
-        actOnElementList(textView,"Afficher");
     }
 
     public boolean verifyCardProduct(){
@@ -61,8 +85,17 @@ public class ProductPage extends Page{
         return productInfoFrame.isDisplayed();
     }
 
-    private Double removeEuroDevise(String element){
-        return Double.parseDouble(element.replaceAll("\"€\"", ""));
+    public boolean verifyFilterOption(){
+        shortWaitUntil(visibilityOf(productCounter));
+        return !productCounter.getText().equals(product_result);
+    }
+
+    public boolean verifyFilterActivation(){
+        try{
+            return filterActived.isDisplayed();
+        }catch(Exception e){
+            return false;
+        }
     }
 
 }

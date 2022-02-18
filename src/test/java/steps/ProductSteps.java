@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -35,8 +36,42 @@ public class ProductSteps {
         productPage.sortValue(option);
     }
 
-    @Then("User should see effective sort by operation")
-    public void verifySortByOperation() {
-        Assert.assertEquals(productPage.priceFilterIncrease(),true);
+    @And("User select product {string}")
+    public void userSelectProductOption(String product_option) {
+        productPage.filterOption(product_option);
     }
+
+    @Then("User should see product result decrease")
+    public void productResultDecreased() {
+        productPage.submitFilter();
+        Assert.assertEquals(productPage.verifyFilterOption(),true);
+    }
+
+    @Then("User should see filter active")
+    public void filterActived() {
+        Assert.assertEquals(productPage.verifyFilterActivation(),true);
+    }
+
+    @When("User select again product {string}")
+    public void userSelectAgainProduct(String product_option) {
+        productPage.filterOption(product_option);
+    }
+
+    @Then("User should see filter disappear")
+    public void filterDisappear() {
+        Assert.assertEquals(productPage.verifyFilterActivation(),false);
+    }
+
+    @And("User click on re-initialise button")
+    public void reInitialiseFilter() {
+        productPage.resetFilter();
+    }
+
+    @Then("User should see default product result display")
+    public void defaultProductResultDisplay() {
+        productPage.submitFilter();
+        Assert.assertEquals(productPage.verifyFilterOption(),false);
+    }
+
+
 }
